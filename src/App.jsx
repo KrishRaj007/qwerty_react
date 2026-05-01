@@ -9,6 +9,9 @@ import HomePage from './component/HomePage'
 import Contact from './component/Contact'
 import { Route, Routes } from 'react-router-dom'
 import Profile from './component/Profile'
+import { UserContext } from './UserContext'
+import Search from './component/Search'
+import Products from './component/Products'
 
 
 function App() {
@@ -18,14 +21,18 @@ function App() {
 
   return (
     <>
+      <UserContext.Provider value={name}>
+        <Routes>
+          <Route path='homepage' element={<HomePage/>}>
+            <Route path='sample' element={<Sample/>}/>
+          </Route>
+          <Route path='/contact' element={<Contact/>}/>
+          <Route path='/profile/:username' element={<Profile/>}/>
+          <Route path="/search" element={<Search/>}/>
+          <Route path='/product' element={<Products/>}/>
+        </Routes>
+      </UserContext.Provider>
 
-      <Routes>
-        <Route path='homepage' element={<HomePage name={name}/>}>
-          <Route path='sample' element={<Sample/>}/>
-        </Route>
-        <Route path='/contact' element={<Contact/>}/>
-        <Route path='/profile/:username' element={<Profile/>}/>
-      </Routes>
     </>
   )
 }
